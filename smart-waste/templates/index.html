@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0d9f6e" />
+    <meta name="description" content="SMART WASTE - Phân loại rác thông minh bằng AI Computer Vision." />
+    <title>SMART WASTE – Phân loại rác thông minh</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="SMART WASTE trang chủ">
+          <span class="brand-mark" aria-hidden="true">
+            <span class="brand-arrow brand-arrow-one">↻</span>
+            <span class="brand-arrow brand-arrow-two">↺</span>
+            <span class="brand-leaf">⌁</span>
+          </span>
+          <span class="brand-copy">
+            <strong>SMART WASTE</strong>
+            <small>AI FOR A CLEANER TOMORROW</small>
+          </span>
+        </a>
+        <div class="header-title">
+          <strong>PHÂN LOẠI RÁC THÔNG MINH</strong>
+          <small>Nhận diện đúng – Phân loại chuẩn – Bảo vệ môi trường</small>
+        </div>
+        <div class="header-note">
+          <span class="status-dot"></span>
+          <span>AI đang sẵn sàng</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero-section" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> AI COMPUTER VISION / 01</p>
+            <h1 id="hero-title">Phân loại đúng.<br /><em>Sống xanh hơn.</em></h1>
+            <p class="hero-description">
+              Chụp hoặc tải ảnh rác lên. SMART WASTE sẽ giúp bạn nhận diện nhanh và chọn đúng nơi bỏ rác.
+            </p>
+            <div class="hero-stats" aria-label="Thông tin hệ thống">
+              <div><strong>05</strong><span>nhóm rác</span></div>
+              <div><strong>01</strong><span>thao tác đơn giản</span></div>
+              <div><strong>∞</strong><span>tác động xanh</span></div>
+            </div>
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <div class="orbit orbit-large"></div>
+            <div class="orbit orbit-small"></div>
+            <div class="visual-leaf leaf-a">⌁</div>
+            <div class="visual-leaf leaf-b">⌁</div>
+            <div class="visual-bottle">♻</div>
+            <div class="visual-label">SORT<br /><span>SMART</span></div>
+          </div>
+        </section>
+
+        <section class="classifier-card" id="classifier" aria-labelledby="classifier-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow"><span></span> BẮT ĐẦU PHÂN LOẠI</p>
+              <h2 id="classifier-title">Bạn đang muốn phân loại loại rác nào?</h2>
+            </div>
+            <span class="step-badge">BƯỚC <strong id="stepNumber">01</strong> / 03</span>
+          </div>
+
+          <div class="upload-options" id="uploadOptions">
+            <button class="choice-card choice-camera" id="cameraButton" type="button">
+              <span class="choice-icon">⌾</span>
+              <span class="choice-text"><strong>CHỤP ẢNH</strong><small>Mở camera thiết bị</small></span>
+              <span class="choice-arrow">↗</span>
+            </button>
+            <button class="choice-card choice-upload" id="uploadButton" type="button">
+              <span class="choice-icon">↑</span>
+              <span class="choice-text"><strong>TẢI ẢNH LÊN</strong><small>JPG, JPEG hoặc PNG</small></span>
+              <span class="choice-arrow">↗</span>
+            </button>
+            <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden />
+            <input id="fileInput" type="file" accept="image/jpeg,image/png" hidden />
+          </div>
+
+          <div class="drop-zone" id="dropZone" tabindex="0" role="button" aria-label="Kéo thả ảnh vào đây hoặc chọn ảnh từ thiết bị">
+            <span class="drop-icon">✦</span>
+            <strong>Kéo &amp; thả ảnh vào đây</strong>
+            <span>hoặc click để chọn từ thiết bị</span>
+          </div>
+
+          <div class="preview-area" id="previewArea" hidden>
+            <div class="preview-frame">
+              <img id="previewImage" src="" alt="Ảnh rác đã chọn" />
+              <span class="preview-chip">ẢNH ĐÃ CHỌN</span>
+            </div>
+            <div class="preview-details">
+              <div class="file-row"><span class="file-icon">▧</span><div><strong id="fileName">ten-anh.jpg</strong><small id="fileMeta">JPG · 0 KB</small></div></div>
+              <p class="preview-hint">Hãy chắc chắn vật thể chính nằm rõ trong khung hình để AI nhận diện chính xác hơn.</p>
+              <div class="preview-actions">
+                <button class="btn btn-primary" id="classifyButton" type="button"><span>PHÂN LOẠI NGAY</span><b>↗</b></button>
+                <button class="btn btn-ghost" id="chooseAgainButton" type="button">CHỌN ẢNH KHÁC</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="loading-state" id="loadingState" hidden>
+            <div class="loading-orbit"><span></span></div>
+            <div><strong>AI đang nhìn ảnh của bạn...</strong><small>Đang phân tích hình ảnh và đối chiếu 5 nhóm rác</small></div>
+          </div>
+
+          <div class="result-card" id="resultCard" hidden>
+            <div class="result-topline"><span class="success-badge"><i>✓</i> AI ĐÃ PHÂN TÍCH</span><button class="close-result" id="resetButton" type="button" aria-label="Phân loại ảnh mới">×</button></div>
+            <div class="result-content">
+              <div class="result-symbol" id="resultSymbol">♻</div>
+              <div class="result-main">
+                <p class="eyebrow">KẾT QUẢ PHÂN LOẠI</p>
+                <h3 id="resultLabel">NHỰA</h3>
+                <div class="confidence-label"><span>ĐỘ TIN CẬY</span><strong id="confidenceValue">94.52%</strong></div>
+                <div class="confidence-track"><span id="confidenceBar"></span></div>
+              </div>
+              <div class="result-bin"><span>NÊN BỎ VÀO</span><strong id="resultBin">THÙNG RÁC TÁI CHẾ</strong></div>
+            </div>
+            <div class="result-guidance"><span class="guidance-icon">✧</span><div><strong>Gợi ý xanh cho bạn</strong><p id="resultGuidance">Rửa sạch và ép dẹt chai/lọ nhựa trước khi phân loại nếu phù hợp.</p></div></div>
+            <p class="fallback-note" id="fallbackNote" hidden>Đang ở chế độ demo vì chưa có <code>waste_model.h5</code>. Hãy thêm model thật vào <code>static/models/</code> để dùng dự đoán TensorFlow.</p>
+          </div>
+          <p class="error-message" id="errorMessage" role="alert" hidden></p>
+        </section>
+
+        <section class="how-section" aria-labelledby="how-title">
+          <div class="how-heading"><p class="eyebrow"><span></span> TỪ ẢNH ĐẾN HÀNH ĐỘNG</p><h2 id="how-title">Một lựa chọn nhỏ.<br /><em>Một thay đổi lớn.</em></h2></div>
+          <div class="how-steps">
+            <div class="how-step"><span>01</span><div><strong>Chụp hoặc tải ảnh</strong><p>Ghi lại vật thể bạn muốn phân loại.</p></div></div>
+            <div class="how-line"></div>
+            <div class="how-step"><span>02</span><div><strong>AI nhận diện</strong><p>Computer Vision phân tích hình ảnh.</p></div></div>
+            <div class="how-line"></div>
+            <div class="how-step"><span>03</span><div><strong>Bỏ đúng thùng</strong><p>Nhận hướng dẫn rõ ràng, dễ làm theo.</p></div></div>
+          </div>
+        </section>
+
+        <section class="about-section" aria-labelledby="about-title">
+          <div class="about-mark" aria-hidden="true">✳</div>
+          <div><p class="eyebrow"><span></span> VỀ SMART WASTE</p><h2 id="about-title">Công nghệ đứng về phía <em>hành tinh.</em></h2><p>SMART WASTE là giải pháp ứng dụng AI Computer Vision nhằm hỗ trợ người dùng nhận diện và phân loại rác nhanh chóng, góp phần nâng cao ý thức bảo vệ môi trường.</p></div>
+          <div class="about-tag">REUSE<br />REDUCE<br />RECYCLE</div>
+        </section>
+      </main>
+
+      <footer class="site-footer"><span>SMART WASTE <i>·</i> STUDENT STARTUP DEMO</span><span>NHẬN DIỆN ĐÚNG — PHÂN LOẠI CHUẨN — BẢO VỆ MÔI TRƯỜNG</span></footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

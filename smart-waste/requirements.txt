@@ -1,0 +1,7 @@
+Flask==3.0.3
+Pillow==10.4.0
+numpy==1.26.4
+# TensorFlow là tùy chọn để chạy model thật.
+# Windows native: dùng Python 3.10 và bỏ comment dòng dưới.
+# tensorflow-cpu==2.10.1
+# WSL2/Linux hoặc môi trường tương thích: có thể dùng tensorflow>=2.15,<2.19
